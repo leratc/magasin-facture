@@ -1,0 +1,32 @@
+{
+  "magasinFactureApp": {
+    "client": {
+      "home": {
+        "title": "Clients",
+        "createLabel": "Create a new Client",
+        "createOrEditLabel": "Create or edit a Client",
+        "notFound": "No Clients found"
+      },
+      "created": "A new Client is created with identifier {{ param }}",
+      "updated": "A Client is updated with identifier {{ param }}",
+      "deleted": "A Client is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Client {{ id }}?"
+      },
+      "detail": {
+        "title": "Client"
+      },
+      "prenom": "Prenom",
+      "nom": "Nom",
+      "civilite": "Civilite",
+      "email": "Email",
+      "telephone": "Telephone",
+      "addresseLigne1": "Addresse Ligne 1",
+      "addresseLigne2": "Addresse Ligne 2",
+      "ville": "Ville",
+      "pays": "Pays",
+      "user": "User",
+      "commande": "Commande"
+    }
+  }
+}

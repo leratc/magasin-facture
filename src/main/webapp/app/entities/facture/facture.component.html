@@ -1,0 +1,83 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="magasinFactureApp.facture.home.title">Factures</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-facture" [routerLink]="['/facture/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="magasinFactureApp.facture.home.createLabel">
+            Create a new Facture
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="factures?.length === 0">
+        <span jhiTranslate="magasinFactureApp.facture.home.notFound">No factures found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="factures && factures.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="code"><span jhiTranslate="magasinFactureApp.facture.code">Code</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="date"><span jhiTranslate="magasinFactureApp.facture.date">Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="details"><span jhiTranslate="magasinFactureApp.facture.details">Details</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="statut"><span jhiTranslate="magasinFactureApp.facture.statut">Statut</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="methodePaiement"><span jhiTranslate="magasinFactureApp.facture.methodePaiement">Methode Paiement</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="datePaiement"><span jhiTranslate="magasinFactureApp.facture.datePaiement">Date Paiement</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="montantPaiement"><span jhiTranslate="magasinFactureApp.facture.montantPaiement">Montant Paiement</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let facture of factures ;trackBy: trackId">
+                    <td><a [routerLink]="['/facture', facture.id, 'view']">{{ facture.id }}</a></td>
+                    <td>{{ facture.code }}</td>
+                    <td>{{ facture.date | date:'medium' }}</td>
+                    <td>{{ facture.details }}</td>
+                    <td jhiTranslate="{{ 'magasinFactureApp.StatutFacture.' + facture.statut }}">{{ facture.statut }}</td>
+                    <td jhiTranslate="{{ 'magasinFactureApp.MethodePaiement.' + facture.methodePaiement }}">{{ facture.methodePaiement }}</td>
+                    <td>{{ facture.datePaiement | date:'medium' }}</td>
+                    <td>{{ facture.montantPaiement }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/facture', facture.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/facture', facture.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(facture)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="factures && factures.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

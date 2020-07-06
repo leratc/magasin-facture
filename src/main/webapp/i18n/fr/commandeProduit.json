@@ -1,0 +1,27 @@
+{
+  "magasinFactureApp": {
+    "commandeProduit": {
+      "home": {
+        "title": "CommandeProduits",
+        "createLabel": "Créer un nouveau Commande Produit",
+        "createOrEditLabel": "Créer ou éditer un Commande Produit",
+        "notFound": "Aucun Commande Produit trouvé"
+      },
+      "created": "Un nouveau Commande Produit a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Commande Produit avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Commande Produit avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Commande Produit {{ id }} ?"
+      },
+      "detail": {
+        "title": "Commande Produit"
+      },
+      "dateCommande": "Date Commande",
+      "statut": "Statut",
+      "code": "Code",
+      "factureId": "Facture Id",
+      "ligneCommande": "Ligne Commande",
+      "client": "Client"
+    }
+  }
+}

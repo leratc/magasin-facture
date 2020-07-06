@@ -1,0 +1,66 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="client">
+            <h2><span jhiTranslate="magasinFactureApp.client.detail.title">Client</span> {{ client.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="magasinFactureApp.client.prenom">Prenom</span></dt>
+                <dd>
+                    <span>{{ client.prenom }}</span>
+                </dd>
+                <dt><span jhiTranslate="magasinFactureApp.client.nom">Nom</span></dt>
+                <dd>
+                    <span>{{ client.nom }}</span>
+                </dd>
+                <dt><span jhiTranslate="magasinFactureApp.client.civilite">Civilite</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'magasinFactureApp.Civilite.' + client.civilite }}">{{ client.civilite }}</span>
+                </dd>
+                <dt><span jhiTranslate="magasinFactureApp.client.email">Email</span></dt>
+                <dd>
+                    <span>{{ client.email }}</span>
+                </dd>
+                <dt><span jhiTranslate="magasinFactureApp.client.telephone">Telephone</span></dt>
+                <dd>
+                    <span>{{ client.telephone }}</span>
+                </dd>
+                <dt><span jhiTranslate="magasinFactureApp.client.addresseLigne1">Addresse Ligne 1</span></dt>
+                <dd>
+                    <span>{{ client.addresseLigne1 }}</span>
+                </dd>
+                <dt><span jhiTranslate="magasinFactureApp.client.addresseLigne2">Addresse Ligne 2</span></dt>
+                <dd>
+                    <span>{{ client.addresseLigne2 }}</span>
+                </dd>
+                <dt><span jhiTranslate="magasinFactureApp.client.ville">Ville</span></dt>
+                <dd>
+                    <span>{{ client.ville }}</span>
+                </dd>
+                <dt><span jhiTranslate="magasinFactureApp.client.pays">Pays</span></dt>
+                <dd>
+                    <span>{{ client.pays }}</span>
+                </dd>
+                <dt><span jhiTranslate="magasinFactureApp.client.user">User</span></dt>
+                <dd>
+                    {{ client.user?.login }}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/client', client.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

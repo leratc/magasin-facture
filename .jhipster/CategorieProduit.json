@@ -1,0 +1,43 @@
+{
+  "name": "CategorieProduit",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tauxTaxe",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "importe",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "produit",
+      "otherEntityRelationshipName": "categorieProduit",
+      "relationshipName": "produit"
+    }
+  ],
+  "changelogDate": "20200705115642",
+  "entityTableName": "categorie_produit",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

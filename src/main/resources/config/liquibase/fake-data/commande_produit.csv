@@ -1,0 +1,4 @@
+id;date_commande;statut;code;facture_id;client_id
+1;2020-07-05T04:00:02;EN_COURS;f01;1;2
+2;2020-07-05T04:00:02;EN_COURS;f02;2;2
+3;2020-07-05T04:00:02;EN_COURS;f03;3;2

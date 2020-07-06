@@ -1,0 +1,10 @@
+{
+  "magasinFactureApp": {
+    "StatutLigneCommande": {
+      "null": "",
+      "DISPONIBLE": "DISPONIBLE",
+      "EN_RUPTURE": "EN_RUPTURE",
+      "EN_REASSORT": "EN_REASSORT"
+    }
+  }
+}

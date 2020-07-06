@@ -1,0 +1,10 @@
+id;nom;description;prix;categorie_produit_id
+1;livre;livre;12.49;5
+2;autre;CD musical;14.99;6
+3;nourriture;barre de chocolat;0.85;1
+4;nourriture_importe;boîte de chocolat;10;2
+5;autre_importe;flacon de parfum importé;47.50;7
+6;autre_importe;flacon de parfum importé;27.99;7
+7;autre;flacon de parfum;18.99;6
+8;medicament;boîte de pilules contre la migraine;9.75;3
+9;nourriture_importe;boîte de chocolats importés;11.25;2

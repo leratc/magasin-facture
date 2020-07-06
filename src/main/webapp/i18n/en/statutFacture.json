@@ -1,0 +1,10 @@
+{
+  "magasinFactureApp": {
+    "StatutFacture": {
+      "null": "",
+      "PAYE": "PAYE",
+      "EMISE": "EMISE",
+      "ANNULEE": "ANNULEE"
+    }
+  }
+}

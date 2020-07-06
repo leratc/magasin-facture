@@ -1,0 +1,8 @@
+id;nom;description;taux_taxe;importe
+1;nourriture;Nourriture est détaxée;0.00;false
+2;nourriture_importe;Nourriture avec une taxe d'import;0.00;true
+3;medicament;Médicament est détaxé;0.00;false
+4;medicament_importe;Médicament avec une taxe d'import;0.00;true
+5;livre;Le livre;0.10;false
+6;autre;produit taxé au maximum;0.20;false
+7;autre_importe;produit taxé au maximum avec taxe d'import;0.20;true

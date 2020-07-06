@@ -1,0 +1,76 @@
+/* Entités pour magasin */
+/** Produit magazin en ligne */
+entity Produit {
+    nom String required
+    description String
+    prix BigDecimal required min(0)
+}
+entity CategorieProduit {
+    nom String required
+    description String
+    tauxTaxe BigDecimal
+    importe Boolean
+}
+entity Client {
+    prenom String required
+    nom String required
+    civilite Civilite required
+    email String required pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)
+    telephone String required
+    addresseLigne1 String required
+    addresseLigne2 String
+    ville String required
+    pays String required
+}
+enum Civilite {
+    HOMME, FEMME, AUTRE
+}
+entity CommandeProduit {
+    dateCommande Instant required
+    statut StatutCommande required
+    code String required
+    factureId Long
+}
+enum StatutCommande {
+    TERMINEE, EN_COURS, ANNULEE
+}
+entity LigneCommande {
+    quantite Integer required min(0)
+    prixTotalHT BigDecimal required min(0)
+    statut StatutLigneCommande required
+}
+enum StatutLigneCommande {
+    DISPONIBLE, EN_RUPTURE, EN_REASSORT
+}
+relationship OneToOne {
+    Client{user(login) required} to User
+}
+relationship ManyToOne {
+ LigneCommande{produit(nom) required} to Produit
+}
+relationship OneToMany {
+   Client{commande} to CommandeProduit{client(email) required},
+   CommandeProduit{ligneCommande} to LigneCommande{commande(code) required} ,
+   CategorieProduit{produit} to Produit{categorieProduit(nom)}
+}
+service Produit, CategorieProduit, Client, CommandeProduit, LigneCommande with serviceClass
+paginate Produit, Client, CommandeProduit, LigneCommande with pagination
+/* Entités pour Facture */
+entity Facture {
+    code String required
+    date Instant required
+    details String
+    statut StatutFacture required
+    methodePaiement MethodePaiement required
+    datePaiement Instant required
+    montantPaiement BigDecimal required
+}
+enum StatutFacture {
+    PAYE, EMISE, ANNULEE
+}
+enum MethodePaiement {
+    CARTE_CREDIT, COMPTANT, PAYPAL
+}
+
+service Facture with serviceClass
+paginate Facture with pagination

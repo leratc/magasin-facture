@@ -1,0 +1,58 @@
+{
+  "name": "CommandeProduit",
+  "fields": [
+    {
+      "fieldName": "dateCommande",
+      "fieldType": "Instant",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "statut",
+      "fieldType": "StatutCommande",
+      "fieldValues": "TERMINEE,EN_COURS,ANNULEE",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "factureId",
+      "fieldType": "Long"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "ligneCommande",
+      "otherEntityRelationshipName": "commande",
+      "relationshipName": "ligneCommande"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "client",
+      "otherEntityRelationshipName": "commande",
+      "relationshipValidateRules": "required",
+      "relationshipName": "client",
+      "otherEntityField": "email"
+    }
+  ],
+  "changelogDate": "20200705115842",
+  "entityTableName": "commande_produit",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="facture">
+            <h2><span jhiTranslate="magasinFactureApp.facture.detail.title">Facture</span> {{ facture.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="magasinFactureApp.facture.code">Code</span></dt>
+                <dd>
+                    <span>{{ facture.code }}</span>
+                </dd>
+                <dt><span jhiTranslate="magasinFactureApp.facture.date">Date</span></dt>
+                <dd>
+                    <span>{{ facture.date }}</span>
+                </dd>
+                <dt><span jhiTranslate="magasinFactureApp.facture.details">Details</span></dt>
+                <dd>
+                    <span>{{ facture.details }}</span>
+                </dd>
+                <dt><span jhiTranslate="magasinFactureApp.facture.statut">Statut</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'magasinFactureApp.StatutFacture.' + facture.statut }}">{{ facture.statut }}</span>
+                </dd>
+                <dt><span jhiTranslate="magasinFactureApp.facture.methodePaiement">Methode Paiement</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'magasinFactureApp.MethodePaiement.' + facture.methodePaiement }}">{{ facture.methodePaiement }}</span>
+                </dd>
+                <dt><span jhiTranslate="magasinFactureApp.facture.datePaiement">Date Paiement</span></dt>
+                <dd>
+                    <span>{{ facture.datePaiement }}</span>
+                </dd>
+                <dt><span jhiTranslate="magasinFactureApp.facture.montantPaiement">Montant Paiement</span></dt>
+                <dd>
+                    <span>{{ facture.montantPaiement }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/facture', facture.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

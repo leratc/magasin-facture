@@ -1,0 +1,60 @@
+{
+  "name": "LigneCommande",
+  "fields": [
+    {
+      "fieldName": "quantite",
+      "fieldType": "Integer",
+      "fieldValidateRules": [
+        "required",
+        "min"
+      ],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "prixTotalHT",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": [
+        "required",
+        "min"
+      ],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "statut",
+      "fieldType": "StatutLigneCommande",
+      "fieldValues": "DISPONIBLE,EN_RUPTURE,EN_REASSORT",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "produit",
+      "otherEntityRelationshipName": "ligneCommande",
+      "relationshipValidateRules": "required",
+      "relationshipName": "produit",
+      "otherEntityField": "nom"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "commandeProduit",
+      "otherEntityRelationshipName": "ligneCommande",
+      "relationshipValidateRules": "required",
+      "relationshipName": "commande",
+      "otherEntityField": "code"
+    }
+  ],
+  "changelogDate": "20200705115942",
+  "entityTableName": "ligne_commande",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

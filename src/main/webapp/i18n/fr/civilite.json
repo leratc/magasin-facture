@@ -1,0 +1,10 @@
+{
+  "magasinFactureApp": {
+    "Civilite": {
+      "null": "",
+      "HOMME": "HOMME",
+      "FEMME": "FEMME",
+      "AUTRE": "AUTRE"
+    }
+  }
+}

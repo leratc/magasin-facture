@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="commandeProduit">
+            <h2><span jhiTranslate="magasinFactureApp.commandeProduit.detail.title">Commande Produit</span> {{ commandeProduit.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="magasinFactureApp.commandeProduit.dateCommande">Date Commande</span></dt>
+                <dd>
+                    <span>{{ commandeProduit.dateCommande }}</span>
+                </dd>
+                <dt><span jhiTranslate="magasinFactureApp.commandeProduit.statut">Statut</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'magasinFactureApp.StatutCommande.' + commandeProduit.statut }}">{{ commandeProduit.statut }}</span>
+                </dd>
+                <dt><span jhiTranslate="magasinFactureApp.commandeProduit.code">Code</span></dt>
+                <dd>
+                    <span>{{ commandeProduit.code }}</span>
+                </dd>
+                <dt><span jhiTranslate="magasinFactureApp.commandeProduit.factureId">Facture Id</span></dt>
+                <dd>
+                    <span>{{ commandeProduit.factureId }}</span>
+                </dd>
+                <dt><span jhiTranslate="magasinFactureApp.commandeProduit.client">Client</span></dt>
+                <dd>
+                    <div *ngIf="commandeProduit.client">
+                        <a [routerLink]="['/client', commandeProduit.client?.id, 'view']">{{ commandeProduit.client?.email }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/commande-produit', commandeProduit.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

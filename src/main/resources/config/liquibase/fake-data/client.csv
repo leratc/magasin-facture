@@ -1,0 +1,4 @@
+id;prenom;nom;civilite;email;telephone;addresse_ligne_1;addresse_ligne_2;ville;pays;user_id
+1;Gérard;Leclerc;HOMME;"lerclercg@gmail.com";0150558899;1 rue des églantiers;Batiment A;Paris;France;4
+2;Albert;Duchemin;HOMME;"duchemina@gmail.com";0150557799;3 rue des arbres fleuris;au fonds à gauche;Paris;France;3
+

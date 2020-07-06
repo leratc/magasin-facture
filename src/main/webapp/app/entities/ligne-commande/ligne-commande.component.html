@@ -1,0 +1,87 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="magasinFactureApp.ligneCommande.home.title">Ligne Commandes</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-ligne-commande" [routerLink]="['/ligne-commande/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="magasinFactureApp.ligneCommande.home.createLabel">
+            Create a new Ligne Commande
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="ligneCommandes?.length === 0">
+        <span jhiTranslate="magasinFactureApp.ligneCommande.home.notFound">No ligneCommandes found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="ligneCommandes && ligneCommandes.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="quantite"><span jhiTranslate="magasinFactureApp.ligneCommande.quantite">Quantite</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="prixTotalHT"><span jhiTranslate="magasinFactureApp.ligneCommande.prixTotalHT">Prix Total HT</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="statut"><span jhiTranslate="magasinFactureApp.ligneCommande.statut">Statut</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="produit.nom"><span jhiTranslate="magasinFactureApp.ligneCommande.produit">Produit</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="commande.code"><span jhiTranslate="magasinFactureApp.ligneCommande.commande">Commande</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ligneCommande of ligneCommandes ;trackBy: trackId">
+                    <td><a [routerLink]="['/ligne-commande', ligneCommande.id, 'view']">{{ ligneCommande.id }}</a></td>
+                    <td>{{ ligneCommande.quantite }}</td>
+                    <td>{{ ligneCommande.prixTotalHT }}</td>
+                    <td jhiTranslate="{{ 'magasinFactureApp.StatutLigneCommande.' + ligneCommande.statut }}">{{ ligneCommande.statut }}</td>
+                    <td>
+                        <div *ngIf="ligneCommande.produit">
+                            <a [routerLink]="['/produit', ligneCommande.produit?.id, 'view']" >{{ ligneCommande.produit?.nom }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="ligneCommande.commande">
+                            <a [routerLink]="['/commande-produit', ligneCommande.commande?.id, 'view']" >{{ ligneCommande.commande?.code }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/ligne-commande', ligneCommande.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/ligne-commande', ligneCommande.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(ligneCommande)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="ligneCommandes && ligneCommandes.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>
