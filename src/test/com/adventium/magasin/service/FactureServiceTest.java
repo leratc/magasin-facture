@@ -1,5 +1,7 @@
 package com.adventium.magasin.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.adventium.magasin.MagasinFactureApp;
 import com.adventium.magasin.domain.CategorieProduit;
 import com.adventium.magasin.domain.Facture;
@@ -7,6 +9,11 @@ import com.adventium.magasin.domain.Produit;
 import com.adventium.magasin.repository.FactureRepository;
 import com.adventium.magasin.repository.LigneCommandeRepository;
 import com.adventium.magasin.repository.ProduitRepository;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -20,13 +27,6 @@ import org.springframework.data.repository.config.RepositoryConfiguration;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 /**
  * @author Christophe
  */
@@ -39,26 +39,29 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class FactureServiceTest {
     @Autowired
     private FactureRepository factureRepository;
+
     @Autowired
     private LigneCommandeRepository ligneCommandeRepository;
+
     @Autowired
     private ProduitRepository produitRepository;
+
     @TestConfiguration
     class FactureServiceImplTestContextConfiguration {
 
         @Bean
         public FactureService factureService() {
-            return new FactureService(factureRepository, ligneCommandeRepository,produitRepository);
+            return new FactureService(factureRepository, ligneCommandeRepository, produitRepository);
         }
     }
+
     @Autowired
     private FactureService factureService;
 
     @Test
     public void test_calculPrixTTCProduit() {
-
         Produit produit1 = new Produit();
-        CategorieProduit cp =new CategorieProduit();
+        CategorieProduit cp = new CategorieProduit();
         cp.setNom("livre");
         cp.setTauxTaxe(BigDecimal.valueOf(0.10).setScale(2));
         cp.setImporte(false);
@@ -69,11 +72,11 @@ public class FactureServiceTest {
 
         assertThat(montantTTC.setScale(2)).isEqualTo(BigDecimal.valueOf(19.80).setScale(2));
     }
+
     @Test
     public void test_calculPrixTTCProduitImporte() {
-
         Produit produit1 = new Produit();
-        CategorieProduit cp =new CategorieProduit();
+        CategorieProduit cp = new CategorieProduit();
         cp.setNom("livre");
         cp.setTauxTaxe(BigDecimal.valueOf(0.10).setScale(2));
         cp.setImporte(true);
@@ -82,8 +85,9 @@ public class FactureServiceTest {
         produit1.setPrix(BigDecimal.valueOf(10.00).setScale(2));
         BigDecimal montantTTC = FactureService.calculPrixTTCProduit(produit1);
 
-        assertThat(montantTTC.setScale(2)).isEqualTo(BigDecimal.valueOf(11.50).setScale(2));
+        assertThat(montantTTC.setScale(2, RoundingMode.HALF_UP)).isEqualTo(BigDecimal.valueOf(11.50).setScale(2, RoundingMode.HALF_UP));
     }
+
     @Test
     public void test_generateFactureTTCFromCommandeProduitId() {
         Facture facture1 = factureService.generateFactureTTCFromCommandeProduitId(1L);
